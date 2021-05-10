@@ -19,7 +19,7 @@
       "type": "webPubSubConnection",
       "name": "connection",
       "userId": "{query.userid}",
-      "hub": "hub",
+      "hub": "chat",
       "direction": "in"
     }
   ]
