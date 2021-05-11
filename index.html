@@ -32,7 +32,7 @@
           const userList = JSON.parse(data.message).statusList;
           userList.forEach((user) => {
             const userContainer = document.createElement('div');
-            userContainer.innerHTML = `<span style="color: ${user.status === "online" ? "green" : "red"}">●</span> ${user.userid}`;
+            userContainer.innerHTML = `<span style="color: ${user.status === "online" ? "green" : "red"}">&bull;</span> ${user.userid}`;
             userListElm.appendChild(userContainer);
           })
           return;
