@@ -9,7 +9,7 @@
       "rewrite": "/.auth/logout"
     },
     {
-      "route": "/index.html",
+      "route": "/",
       "allowedRoles": ["authenticated"]
     }
   ],
