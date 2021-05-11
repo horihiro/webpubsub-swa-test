@@ -52,7 +52,7 @@ module.exports = async function (context, req) {
       };
       userList.push(targetUser);
     }
-    targetUser.status = cloudevent.eventname === "connected" ? "online" : "offline";
+    targetUser.status = cloudevent.eventname;
     targetUser.RowKey = Date.now();
     const userIdList = Array.from(new Set(userList.map(user => user.userid)));
     const statusList = [];
