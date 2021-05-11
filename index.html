@@ -2,12 +2,21 @@
 
 <body>
   <h1>Azure Web PubSub Chat</h1>
-  <input id="message" placeholder="Type to chat..."></input>
-  <div id="messages"></div>
+
+  <div style="overflow: hidden">
+    <div style="float: left;width:200px">
+      <div>User list</div>
+      <div id="users"></div>
+    </div>
+    <div style="float: left;">
+      <input id="message" placeholder="Type to chat..."></input>
+      <div id="messages"></div>
+    </div>
+  </div>
   <script>
     (async function () {
       let messages = document.querySelector('#messages');
-      let id = prompt('Please input your user name');
+      let id = (await (await fetch("/.auth/me")).json()).clientPrincipal.userDetails;
       let res = await fetch(`/api/negotiate?userid=${id}`);
       let data = await res.json();
       console.log(data);
@@ -17,6 +26,17 @@
       ws.onmessage = event => {
         let m = document.createElement('p');
         let data = JSON.parse(event.data);
+        if (data.type === "system") {
+          const userListElm = document.querySelector('#users');
+          userListElm.innerHTML = "";
+          const userList = JSON.parse(data.message).statusList;
+          userList.forEach((user) => {
+            const userContainer = document.createElement('div');
+            userContainer.innerHTML = `<span style="color: ${user.status === "online" ? "green" : "red"}">●</span> ${user.userid}`;
+            userListElm.appendChild(userContainer);
+          })
+          return;
+        }
         m.innerText = `[${data.type || ''}${data.from || ''}] ${data.message}`;
         messages.appendChild(m);
       };

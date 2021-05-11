@@ -38,16 +38,43 @@ module.exports = async function (context, req) {
       "dataType": "text"
 
     };
-    // return;
-  } else if (cloudevent.eventname === "connected") {
+  } else if (cloudevent.eventname === "connected" || cloudevent.eventname === "disconnected") {
+    const userList = context.bindings.userListInput;
+    let targetUser = userList.sort((a, b) => {
+      return a.RowKey > b.RowKey ? 1 : -1
+    }).find((user) => {
+      user.userid === cloudevent.userid
+    });
+    if (!targetUser) {
+      targetUser = {
+        PartitionKey: "Test",
+        userid: cloudevent.userid
+      };
+      userList.push(targetUser);
+    }
+    targetUser.status = cloudevent.eventname === "connected" ? "online" : "offline";
+    targetUser.RowKey = Date.now();
+    const userIdList = Array.from(new Set(userList.map(user => user.userid)));
+    const statusList = [];
+    userIdList.forEach((userid) => {
+      statusList.push({
+        userid,
+        status: userList.filter((user) => user.userid === userid).reduce((prev, curr) => {
+          return prev.RawKey > curr.RawKey ? prev : curr;
+        }, {RawKey: 0}).status
+      })
+    });
     context.bindings.webPubSubOperation = {
       "operationKind": "sendToAll",
       "message": JSON.stringify({
         "type": "system",
-        "message": `${cloudevent.userid} joined`,
+        "message": JSON.stringify({
+          statusList
+        }),
       }),
       "dataType": "text",
     };
+    context.bindings.userListOutput = [targetUser];
   }
 }
 

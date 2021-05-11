@@ -21,6 +21,21 @@
       "name": "webPubSubOperation",
       "hub": "chat",
       "direction": "out"
+    },
+    {
+      "type": "table",
+      "tableName": "Person",
+      "connection": "MyStorageConnectionAppSetting",
+      "name": "userListInput",
+      "partitionKey": "Test",
+      "direction": "in"
+    },
+    {
+      "tableName": "Person",
+      "connection": "MyStorageConnectionAppSetting",
+      "name": "userListOutput",
+      "type": "table",
+      "direction": "out"
     }
   ]
 }
