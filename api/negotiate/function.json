@@ -16,10 +16,11 @@
       "name": "res"
     },
     {
-      "type": "webPubSubConnection",
+      "type": "signalRConnectionInfo",
       "name": "connection",
       "userId": "{query.userid}",
-      "hub": "chat",
+      "hubName": "chat",
+      "connectionStringSetting": "SignalRConnectionString",
       "direction": "in"
     }
   ]
