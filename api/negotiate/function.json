@@ -16,6 +16,14 @@
       "name": "res"
     },
     {
+      "type": "signalRConnectionInfo",
+      "name": "signalRConnectionInfo",
+      "userId": "{query.userid}",
+      "hubName": "chat",
+      "connectionStringSetting": "SignalRConnectionString",
+      "direction": "in"
+    },
+    {
       "type": "webPubSubConnection",
       "name": "webPubSubConnectionInfo",
       "userId": "{query.userid}",
