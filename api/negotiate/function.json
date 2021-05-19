@@ -17,11 +17,17 @@
     },
     {
       "type": "signalRConnectionInfo",
-      "name": "connection",
+      "name": "signalRConnectionInfo",
       "userId": "{query.userid}",
       "hubName": "chat",
       "connectionStringSetting": "SignalRConnectionString",
       "direction": "in"
-    }
-  ]
+    },
+    {
+      "type": "webPubSubConnection",
+      "name": "webPubSubConnectionInfo",
+      "userId": "{query.userid}",
+      "hub": "chat",
+      "direction": "in"
+    }  ]
 }
