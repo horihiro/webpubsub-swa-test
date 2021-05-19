@@ -20,7 +20,7 @@
       let res = await fetch(`/api/negotiate?userid=${id}`);
       let data = await res.json();
       console.log(data);
-      let ws = new WebSocket(data.url);
+      let ws = new WebSocket(data.webPubSubConnectionInfo.url);
       ws.onopen = () => console.log('connected');
 
       ws.onmessage = event => {

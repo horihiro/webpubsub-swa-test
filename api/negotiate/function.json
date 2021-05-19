@@ -17,9 +17,10 @@
     },
     {
       "type": "webPubSubConnection",
-      "name": "webPubSubConnectionInfo",
+      "name": "connection",
       "userId": "{query.userid}",
       "hub": "chat",
       "direction": "in"
-    }  ]
+    }
+  ]
 }
