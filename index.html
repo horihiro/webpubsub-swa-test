@@ -32,12 +32,12 @@
           const userList = JSON.parse(data.message).statusList;
           userList.filter(user => user.status === "connected").forEach((user) => {
             const userContainer = document.createElement('div');
-            userContainer.innerHTML = `<img width="40px" height="40px" src="https://github.com/${user.userid}.png" title="${user.userid}"><!-- span style="color: ${user.status === "connected" ? "limegreen" : "red"}">&bull;</span> ${user.userid} -->`;
+            userContainer.innerHTML = `<img style="border-radius: 50%" width="40px" height="40px" src="https://github.com/${user.userid}.png" title="${user.userid}"><!-- span style="color: ${user.status === "connected" ? "limegreen" : "red"}">&bull;</span> ${user.userid} -->`;
             userListElm.appendChild(userContainer);
           })
           return;
         }
-        m.innerText = `[${data.type || ''}${data.from || ''}] ${data.message}`;
+        m.innerText = `[${data.type || ''}${data.from ? `<img style="border-radius: 50%" width="30px" height="30px" src="https://github.com/${data.from}.png" title="${data.from}">` : ''}] ${data.message}`;
         messages.appendChild(m);
       };
 
