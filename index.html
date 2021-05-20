@@ -37,7 +37,7 @@
           })
           return;
         }
-        m.innerText = `[${data.type || ''}${data.from ? `<img style="border-radius: 50%" width="30px" height="30px" src="https://github.com/${data.from}.png" title="${data.from}">` : ''}] ${data.message}`;
+        m.innerHTML = `[${data.type || ''}${data.from ? `<img style="border-radius: 50%" width="30px" height="30px" src="https://github.com/${data.from}.png" title="${data.from}">` : ''}] ${data.message}`;
         messages.appendChild(m);
       };
 
