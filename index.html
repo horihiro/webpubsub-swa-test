@@ -30,9 +30,9 @@
           const userListElm = document.querySelector('#users');
           userListElm.innerHTML = "";
           const userList = JSON.parse(data.message).statusList;
-          userList.forEach((user) => {
+          userList.filter(user => user.status === "connected").forEach((user) => {
             const userContainer = document.createElement('div');
-            userContainer.innerHTML = `<span style="color: ${user.status === "connected" ? "limegreen" : "red"}">&bull;</span> ${user.userid}`;
+            userContainer.innerHTML = `<img width="40px" height="40px" src="https://github.com/${user.userid}.png" title="${user.userid}"><!-- span style="color: ${user.status === "connected" ? "limegreen" : "red"}">&bull;</span> ${user.userid} -->`;
             userListElm.appendChild(userContainer);
           })
           return;
